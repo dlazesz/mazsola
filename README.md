@@ -8,6 +8,20 @@ which is accessible together with the Hungarian National Corpus.
 
 Author: [Bálint Sass](http://www.nytud.hu/depts/corpus/Sass_Balint.html)
 
+## Docker vesion
+
+This is a simplified version to be able to easily deploy the original Mazsola based on HNC.
+
+1. cd deploy
+2. Put mazsola_adatbazis.txt compressed with gzip to data/hnc.mazsoladb.gz
+3. docker build -t mazsola .
+4. docker run -it --name mazsola_container --rm -p 8080:8080 mazsola
+5. Go to: http://localhost:8080 use mazsola/mazsola to login
+
+Available at https://hub.docker.com/r/dlazesz/mazsola or docker pull dlazesz/mazsola
+
+Bonus debug server in perl: perl cgi-server.pl
+
 ## Requirements
 
 - linux

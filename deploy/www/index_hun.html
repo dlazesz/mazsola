@@ -1,0 +1,379 @@
+<html>
+
+<head>
+<title>Mazsola - az igei bővítményszerkezet vizsgálata</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2"/>
+<script>
+
+function check () {
+  if (
+      document.f.stem.value == "" &&
+      document.f.case1.value == "" && document.f.lemma1.value == "" &&
+      document.f.case2.value == "" && document.f.lemma2.value == "" &&
+      document.f.case3.value == "" && document.f.lemma3.value == "" &&
+      document.f.str.value == "" ) {
+    alert( "Kérjük, valamit adjon meg." ); return false; }
+  return true;
+}
+
+function set( name, val ) {
+  document.f.elements[name].value = val;
+}
+
+// forrás: http://www.somacon.com/p143.php
+// set the radio button with the given value as being checked
+function setR ( name, val ) {
+  var radioObj = document.f.elements[name]; // radiogomb legyen!!!
+  var radioLength = radioObj.length;
+  if ( radioLength == undefined ) {
+    radioObj.checked = (radioObj.value == val.toString());
+    return;
+  }
+  for ( var i = 0; i < radioLength; i++ ) {
+    radioObj[i].checked = false;
+    if ( radioObj[i].value == val.toString() ) {
+      radioObj[i].checked = true;
+    }
+  }
+}
+
+// checkbox bepipálása
+function setC ( name ) {
+  var checkboxObj = document.f.elements[name]; // checkbox legyen!!!
+  checkboxObj.checked = true;
+}
+
+// minden mező és elem törlése -- egyenként fel kell sorolni őket! XXX
+function clearAll () {
+  document.f.elements['stem'].value = '';
+  document.f.elements['case1not'].checked = false;
+  document.f.elements['case1'].value = '';
+  document.f.elements['lemma1not'].checked = false;
+  document.f.elements['lemma1'].value = '';
+  document.f.elements['case2not'].checked = false;
+  document.f.elements['case2'].value = '';
+  document.f.elements['lemma2not'].checked = false;
+  document.f.elements['lemma2'].value = '';
+  document.f.elements['case3not'].checked = false;
+  document.f.elements['case3'].value = '';
+  document.f.elements['lemma3not'].checked = false;
+  document.f.elements['lemma3'].value = '';
+  document.f.elements['strnot'].checked = false;
+  document.f.elements['str'].value = '';
+}
+
+
+</script>
+</head>
+<body style="font-family: Verdana, Arial, Helvetica, sans-serif">
+
+<div style="position: absolute; top: 0px; left: 0px">
+<a href="index_hun.html"><img src="mazsola.jpg" height="95"/></a>
+</div>
+
+<div style="position: relative; top: 0px; left: 73;
+  font-style: italic">
+
+<h1 style="font-style: normal; font-size: 150%">Mazsola - az igei bővítményszerkezet vizsgálata</h1>
+
+<div style="font-style: normal; font-size: 80%; margin-bottom: 0.5em">
+<a href="index_eng.html">English version</a>
+</div>
+
+<form
+  name="f"
+  action="/cgi-bin/mazsola/mazsola_hun.pl"
+  method="post"
+  onsubmit="return check()">
+
+<span style="font-size: 80%">Korpusz:</span>
+&nbsp;<select name="corpus"><option value="hnc">Magyar Nemzeti Szövegtár</option></select>
+<span style="position: absolute; left: 52em">
+Eloszlás:
+</span>
+
+<br/>
+
+Igető=:   <input type="text" name="stem" size="32" value=""/>
+<span style="position: absolute; left: 52em">
+&nbsp;<input type="radio" name="stat" value="statstem" />
+</span>
+
+<br/>
+
+<span style="font-size: 80%">Nem:</span>     <input type="checkbox" name="case1not" />
+Eset/névutó=:
+         <input type="text" name="case1" size="12" value=""/>
+<span style="font-size: 80%">Nem:</span>     <input type="checkbox" name="lemma1not" />
+Vonzattő=:   <input type="text" name="lemma1" size="32" value=""/>
+<span style="position: absolute; left: 52em">
+&nbsp;<input type="radio" name="stat" value="stat1"  checked/>
+</span>
+
+<br/>
+
+<span style="font-size: 80%">Nem:</span>     <input type="checkbox" name="case2not" />
+Eset/névutó=:
+         <input type="text" name="case2" size="12" value=""/>
+<span style="font-size: 80%">Nem:</span>     <input type="checkbox" name="lemma2not" />
+Vonzattő=:   <input type="text" name="lemma2" size="32" value=""/>
+<span style="position: absolute; left: 52em">
+&nbsp;<input type="radio" name="stat" value="stat2" />
+</span>
+
+<br/>
+
+<span style="font-size: 80%">Nem:</span>     <input type="checkbox" name="case3not" />
+Eset/névutó=:
+         <input type="text" name="case3" size="12" value=""/>
+<span style="font-size: 80%">Nem:</span>     <input type="checkbox" name="lemma3not" />
+Vonzattő=:   <input type="text" name="lemma3" size="32" value=""/>
+<span style="position: absolute; left: 52em">
+&nbsp;<input type="radio" name="stat" value="stat3" />
+</span>
+
+<br/>
+
+<span style="font-size: 80%">Nem:</span>     <input type="checkbox" name="strnot" />
+Szó=:   <input type="text" name="str" size="32" value=""/>
+
+<br/>
+
+<span style="font-size: 80%">Teljes mondatlefedés:</span>
+         <input type="checkbox" name="fullcover" />
+
+<br/>
+
+<input type="submit" style="background: #ffe299" value="Mehet" onSubmit="check()"/>
+
+</form>
+</div>
+
+<div style="position: relative; top: 0px; left: 0px">
+</div>
+
+<div style="position: relative; top: 0px; left: 0px;
+  font-style: italic; font-size: 80%">
+
+Kattintson az egyik alábbi példára majd a 'Mehet' gombra!
+<!-- ezt lehetne automatizálni! -->
+
+<br/>
+
+
+
+<!-- VAB -->
+
+Magyar Nemzeti Szövegtár:
+<a href="#" onClick="clearAll();
+set( 'stem', 'hány' );
+set( 'case1', '-t' );
+setR( 'stat', 'stat1' )
+">hány -t</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'hány' );
+set( 'case1', '-re' );
+setR( 'stat', 'stat1' )
+">hány -re</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'esik' );
+set( 'case1', '-be' );
+setR( 'stat', 'stat1' )
+">esik -be</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'fakaszt' );
+set( 'case1', '-t' );
+setR( 'stat', 'stat1' )
+">fakaszt -t</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'kerül' );
+set( 'case1', 'alá' );
+setR( 'stat', 'stat1' )
+">vmi alá kerül</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'vesz' );
+set( 'case1', 'alá' );
+setR( 'stat', 'stat1' )
+">vmi alá vesz</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'kever' );
+set( 'case1', '-t' );
+setR( 'stat', 'stat1' )
+">kever -t</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'kavar' );
+set( 'case1', '-t' );
+setR( 'stat', 'stat1' )
+">kavar -t</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'fest' );
+set( 'case1', '-t' );
+setR( 'stat', 'stat1' )
+">fest -t</a>,
+
+<br/>
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'fest' );
+set( 'case1', '-t' );
+set( 'case2', '-re' );
+setR( 'stat', 'stat2' )
+">fest -t -re</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'ad' );
+set( 'case1', '-t' );
+set( 'lemma1', 'hang' );
+set( 'case2', '-nak' );
+setR( 'stat', 'stat2' )
+">hangot ad -nek</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'vesz' );
+set( 'case1', '-t' );
+set( 'lemma1', 'rész' );
+set( 'case2', '-ben' );
+setR( 'stat', 'stat2' )
+">részt vesz -ben</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'kerül' );
+set( 'case1', '-re' );
+set( 'case2', 'alany' );
+set( 'lemma2', 'sor' );
+setR( 'stat', 'stat1' );
+">sor kerül -re</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'kerül' );
+set( 'case1', '-re' );
+set( 'case2', 'alany' );
+setC( 'lemma2not', true ); set( 'lemma2', 'sor' );
+setR( 'stat', 'stat1' )
+">kerül -re (de nem sor!)</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'forog' );
+set( 'case1', '-ben' );
+set( 'lemma1', 'veszély' );
+set( 'case2', 'alany' );
+setR( 'stat', 'stat2' )
+">vmi veszélyben forog</a>
+
+<br/>
+
+<!-- VABD -->
+
+Danish Dependency Treebank:
+<a href="#" onClick="clearAll();
+set( 'stem', 'have' );
+set( 'case1', 'dobj' );
+setR( 'stat', 'stat1' )
+">have dobj</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'fĺ' );
+set( 'case1', 'dobj' );
+setR( 'stat', 'stat1' )
+">fĺ dobj</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'vćre' );
+set( 'case1', 'i' );
+setR( 'stat', 'stat1' )
+">vćre i</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'vćre' );
+set( 'case1', 'pĺ' );
+setR( 'stat', 'stat1' )
+">vćre pĺ</a>,
+
+<a href="#" onClick="clearAll();
+set( 'case1', 'til' );
+setR( 'stat', 'stat1' )
+">til (without verb)</a>,
+
+<a href="#" onClick="clearAll();
+set( 'case1', 'ved' );
+setR( 'stat', 'stat1' )
+">ved (without verb)</a>
+
+<br/>
+
+<!-- VABS -->
+
+Intera korpusz (szerb):
+<a href="#" onClick="clearAll();
+set( 'stem', 'imati' );
+set( 'case1', 'ANYCASE' );
+setR( 'stat', 'stat1' )
+">imati ANYCASE</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'imati' );
+set( 'case1', 'ANYCASE' );
+set( 'lemma1', 'pravo' );
+set( 'case2', 'na' );
+setR( 'stat', 'stat2' )
+">imati pravo na</a>
+
+<br/>
+
+<!-- VABNLFR -->
+
+TLT korpusz (holland-francia párhuzamos):
+<a href="#" onClick="clearAll();
+set( 'stem', 'nl_maken\\+fr_faire' );
+set( 'case1', 'nl_ACC' );
+setR( 'stat', 'stat1' )
+">nl_maken\+fr_faire nl_ACC</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'nl_maken\\+fr_faire' );
+set( 'case1', 'fr_ACC' );
+setR( 'stat', 'stat1' )
+">nl_maken\+fr_faire fr_ACC</a>,
+
+<a href="#" onClick="clearAll();
+set( 'stem', 'nl_maken\\+fr_faire' );
+set( 'case1', 'nl_ACC' );
+set( 'lemma1', 'deel' );
+set( 'case2', 'fr_ACC' );
+set( 'lemma2', 'partie' );
+setR( 'stat', 'statstem' )
+">maken deel + faire partie</a>
+
+
+
+<br/><br/>  
+
+<a href="http://www.nytud.hu/oszt/korpusz/resources/sb_mazsola_eszkoz.pdf">Két</a> <a href="http://www.nytud.hu/oszt/korpusz/resources/sb_joizu.pdf">prezentáció</a> a Mazsola használatáról.
+
+<br/><br/>  
+
+<div style="font-style: normal">
+Please, <a href="mailto:sass.balint[at]nytud.hu">inform us</a>
+about your research using our tool and refer to the VAB as:<br/>
+
+Sass, Bálint: <a href="http://dx.doi.org/10.1007/978-3-540-87391-4_25">The Verb Argument Browser</a>. In: <em>Sojka, P. et al. (eds.): Proceedings of TSD 2008,</em> Brno, Czech Republic, 2008, LNCS 5246, 187-192, <code>http://corpus.nytud.hu/vab</code>
+</div>
+
+<br/><br/>
+
+<span style="font-size: 80%">v1.0 &ndash; 2018.01.01.</span><br/>
+Készítette, javaslat, megjegyzés: <a href="http://www.nytud.hu/oszt/korpusz/Sass_Balint.html">Sass Bálint</a><br>
+<a href="http://www.nytud.hu">MTA Nyelvtudományi Intézet</a>
+Nyelvtechnológiai Osztály, 2006&ndash;2018.
+</div>
+
+</body>
+</html>
